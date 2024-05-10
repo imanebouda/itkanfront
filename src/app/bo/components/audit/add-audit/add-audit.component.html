@@ -1,0 +1,51 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Créer un Audit</h2>
+    <form>
+        <div class="form-row mb-3">
+            <div class="col">
+                <label for="auditId">ID de l'Audit :</label>
+                <input type="text"
+                       [(ngModel)]="newAudit.id"
+
+                       class="form-control" id="auditId" name="auditId" placeholder="Entrez l'ID de l'audit" required>
+            </div>
+            <div class="col">
+                <label for="auditName">Nom de l'Audit :</label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="newAudit.nomAudit"
+
+                       id="auditName" name="auditName" placeholder="Entrez le nom de l'audit" required>
+            </div>
+            <div class="col">
+                <label for="auditDate">Date d'Audit :</label>
+                <input type="date" class="form-control"
+                       [(ngModel)]="newAudit.dateAudit"id="auditDate" name="auditDate" required>
+            </div>
+        </div>
+
+        <div class="form-row mb-3">
+            <div class="col">
+                <label for="status">Status :</label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="newAudit.status" id="status" name="status" placeholder="Status" required>
+            </div>
+            <div class="col">
+                <label for="auditType">Type d'Audit :</label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="newAudit.typeAudit" id="auditType" name="auditType" placeholder="Entrez le type d'audit" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                <label for="auditDescription">Description :</label>
+                <textarea class="form-control"
+                          [(ngModel)]="newAudit.description" id="auditDescription" name="auditDescription" rows="3" placeholder="Entrez la description de l'audit" required></textarea>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3" (click)="addAudit()">Créer Audit</button>
+        <a class ="nav-link" [routerLink]="['/list']">Liste des Audits</a>
+    </form>
+</div>

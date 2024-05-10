@@ -1,0 +1,56 @@
+<div class="container">
+    <div>
+        <h2>EDIT    Audit</h2>
+    </div>
+    <form >
+        <div hidden class="col-sm-2 col-md-2 col-lg-2">
+            <label>ID</label>
+            <input type="number"
+                   [(ngModel)]="currentAudit.id"
+                   name="auditId"
+                   class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Nom Audit</label>
+            <input type="text"
+                   [(ngModel)]="currentAudit.nomAudit"
+                   name="auditName"
+                   class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Date Audit</label>
+            <input type="date"
+                   [ngModel]="currentAudit.dateAudit | date: 'yyyy-MM-dd'"
+                   (ngModelChange)="currentAudit.dateAudit = $event"
+                   name="dateCreation"
+                   class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Status</label>
+            <input type="text"
+                   [(ngModel)]="currentAudit.status"
+                   name="auditStatus"
+                   class="form-control">
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Description</label>
+            <input type="text"
+                   [(ngModel)]="currentAudit.description"
+                   name="auditDescription"
+                   class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Type Audit</label>
+            <input type="text"
+                   [(ngModel)]="currentAudit.typeAudit"
+                   name="auditType"
+                   class="form-control">
+        </div>
+
+
+        <div class="mt-2">
+            <button type="submit"  (click)="updateAudit()" class="btn btn-success">UPDATE</button>
+        </div>
+    </form>
+</div>
+

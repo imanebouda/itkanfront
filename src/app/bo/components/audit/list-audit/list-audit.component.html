@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h5>Audit List</h5>
+            <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID l'Audit</th>
+                <th scope="col">Nom de l'Audit</th>
+                <th scope="col">Date d'Audit</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Type d'Audit</th>
+                <th scope="col">Description</th>
+
+            </tr>
+            </thead>
+            <tbody *ngFor ="let audit of audits">
+            <tr>
+              <td>{{audit.id}}</td>
+                <td>{{audit.nomAudit}}</td>
+                <td>{{audit.dateAudit  | date:"dd/MM/yyyy"}}</td>
+                <td>{{audit.status}}</td>
+                <td>{{audit.typeAudit}}</td>
+                <td>{{audit.description}}</td>
+
+                <td><a  class="btn btn-danger" (click)="deleteAudit(audit)">DELETE</a></td>
+                <td><a  class="btn btn-success" [routerLink]="['/editaudit',audit.id]">EDIT</a></td>
+
+
+            </tr>
+
+
+
+
+
+            </tbody>
+        </table>
+        </div> </div>
+</div>

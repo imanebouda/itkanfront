@@ -10,6 +10,7 @@ import {AddConstatComponent} from "./bo/components/Constat/add-constat/add-const
 import {ListConstatComponent} from "./bo/components/Constat/list-constat/list-constat.component";
 import {UpdateAuditComponent} from "./bo/components/audit/update-audit/update-audit.component";
 import {UpdateConstatComponent} from "./bo/components/Constat/update-constat/update-constat.component";
+import {GestionAuditComponent} from "./bo/components/audit/gestion-audit/gestion-audit.component";
 
 @NgModule({
     imports: [
@@ -133,6 +134,10 @@ import {UpdateConstatComponent} from "./bo/components/Constat/update-constat/upd
                         {
                             path: 'addconstat',
                             component: AddConstatComponent,
+                        },
+                        {
+                            path: 'gestionaudit/:id',
+                            component: GestionAuditComponent,
                         },
 
                         {

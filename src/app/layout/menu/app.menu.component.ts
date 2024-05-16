@@ -156,6 +156,15 @@ export class AppMenuComponent implements OnInit {
                         ),
                         ispopup:false
                     },
+                    {
+                        label: 'Paramètres',
+                        icon: 'pi pi-cog',
+                        routerLink: ['parametrages/liste'],
+                        visible: this.generalService.canActivate(
+                            'Paramétrages-Consulter'
+                        ),
+                        ispopup:false
+                    },
 
                 ],
 

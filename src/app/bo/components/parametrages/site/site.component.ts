@@ -7,6 +7,7 @@ import { ParametrageService } from 'src/app/services/parametrages/parametrage.se
 import { SiteService } from 'src/app/services/site/site.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -37,7 +38,8 @@ export class SiteComponent {
  constructor(
      private generalService: GeneralService,
      private apiGeneralService: ApiGeneralService,
-     private site_service: SiteService
+     private site_service: SiteService,
+     private router: Router
  ) {
      /* ---------------------- Initialisation du formulaire ---------------------- */
      this.FormmulaireRecherche = new FormGroup({
@@ -146,7 +148,7 @@ export class SiteComponent {
                                  2000,
                                  'success'
                              );
-                             break;      
+                             break;
                          default:
                              this.generalService.errorSwal(r?.msg);
                              this.is_loading = false;
@@ -209,5 +211,8 @@ export class SiteComponent {
          }
      });
  }
+    openAuditComponent() {
+        this.router.navigate(['/list']); // Assurez-vous que '/audit' est le chemin vers votre composant Audit
+    }
 
 }

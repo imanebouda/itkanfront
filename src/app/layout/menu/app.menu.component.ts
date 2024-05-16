@@ -156,7 +156,25 @@ export class AppMenuComponent implements OnInit {
                         ),
                         ispopup:false
                     },
-
+                    {
+                        label: 'Sites à Auditer',
+                        icon: 'pi pi-users',
+                        routerLink: ['listSiteAudit'],
+                        visible: this.generalService.canActivate(
+                            'Utilisateurs-Consulter'
+                        ),
+                        ispopup:false
+                    },
+                    {
+                        label: 'CheckList',
+                        icon: 'pi pi-users',
+                        routerLink: ['listCheckList'],
+                        visible: this.generalService.canActivate(
+                            'Utilisateurs-Consulter'
+                        ),
+                        ispopup:false
+                    },
+                    
                 ],
 
 

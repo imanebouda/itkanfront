@@ -30,12 +30,16 @@ import { UpdateAuditComponent } from './bo/components/audit/update-audit/update-
 import { AddConstatComponent } from './bo/components/Constat/add-constat/add-constat.component';
 import { ListConstatComponent } from './bo/components/Constat/list-constat/list-constat.component';
 import { UpdateConstatComponent } from './bo/components/Constat/update-constat/update-constat.component';
+
 import { AddSiteAuditComponent } from './bo/components/site-audit/add-site-audit/add-site-audit.component';
 import { ListSiteAuditComponent } from './bo/components/site-audit/list-site-audit/list-site-audit.component';
 import { UpdateSiteAuditComponent } from './bo/components/site-audit/update-site-audit/update-site-audit.component';
 import { UpdateCheckListComponent } from './bo/components/check-list/update-check-list/update-check-list.component';
 import { AddCheckListComponent } from './bo/components/check-list/add-check-list/add-check-list.component';
 import { ListCheckListComponent } from './bo/components/check-list/list-check-list/list-check-list.component';
+
+import {GestionAuditModule} from "./bo/components/audit/gestion-audit/gestion-audit.module";
+
 
 registerLocaleData(localeFr);
 
@@ -48,7 +52,8 @@ registerLocaleData(localeFr);
         NgxPrintModule,
         BrowserAnimationsModule,
         FileUploadModule,
-        NgxExtendedPdfViewerModule
+        NgxExtendedPdfViewerModule,
+        //GestionAuditModule
     ],
     providers: [
         { provide: LOCALE_ID, useValue: 'fr-FR' },

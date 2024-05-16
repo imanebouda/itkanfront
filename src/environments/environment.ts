@@ -49,7 +49,9 @@ export const environment = {
             supprimer:'processus/Delete',
             detaille : 'processus/Detail' ,
             GetProcessusData :'processus/GetProcessusData',
-            getProcessusByPilote:'processus/GetProcessusByPilote'
+            getProcessusByPilote:'processus/GetProcessusByPilote',
+            getProcessusByAuditType:'{auditId}/processus'
+
         },
         ProcesObjectifs :{
             recherche :'ProcesObjectifs/recherche',

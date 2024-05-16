@@ -88,7 +88,7 @@ export class ProcessusService {
     const url = `${environment.API_BASE_URL_GENERAL}${environment.api.Processus.smq}`;
     return this.apiService.get(url);
   }
-  
+
   UpdateProcessus(data: any) {
     return this.apiService.put(
         environment.API_BASE_URL_GENERAL + environment.api.Processus.modifie,
@@ -109,7 +109,7 @@ DetailAnProcessus(data: any){
     data
 );
 }
-  
+
 getDetailProcessus(ID: number){
 const url = `${environment.API_BASE_URL_GENERAL}${environment.api.Processus.detaille}/?ID=${ID}`;
 return this.apiService.get(url);
@@ -134,5 +134,64 @@ GetAllProcessus(){
   const url = `${environment.API_BASE_URL_GENERAL}${environment.api.Processus.getAll}`;
 return this.apiService.get(url);
 }
+/*
+    getProcessusByAuditType(auditType: string): Observable<any> {
+        let endpoint = `${environment.API_BASE_URL_GENERAL}${environment.api.Processus.getProcessusByAuditType}`;
+
+        // Construire les paramètres de requête
+        const params = new HttpParams().set('auditType', auditType);
+
+        // Effectuer l'appel API GET avec les paramètres
+        return this.http.get(endpoint, { params }).pipe(
+            catchError(error => {
+                console.error('Une erreur s\'est produite lors de la récupération des processus par type d\'audit:', error);
+                return throwError(error);
+            })
+        );
+    }*/
+    getProcessusByAuditType(
+        code: string,
+        libelle: string,
+        categorie: string,
+        field: string,
+        order: string,
+        take: number,
+        skip: number
+    ){
+        // Construisez l'URL de base
+        let endpoint = `${environment.API_BASE_URL_GENERAL}${environment.api.Processus.getProcessusByAuditType}`;
+        // Ajoutez les paramètres non nuls à l'URL
+        const params: string[] = [];
+
+        if (code) {
+            params.push(`code=${code}`);
+        }
+        if (libelle) {
+            params.push(`libelle=${libelle}`);
+        }
+        if (categorie) {
+            params.push(`categorie=${categorie}`);
+        }
+        if (field) {
+            params.push(`field=${field}`);
+        }
+        if (order) {
+            params.push(`order=${order}`);
+        }
+        if (take) {
+            params.push(`take=${take}`);
+        }
+        if (skip) {
+            params.push(`skip=${skip}`);
+        }
+
+        if (params.length > 0) {
+            endpoint += '?' + params.join('&');
+        }
+        // Effectuez l'appel API GET
+        return this.apiService.get(endpoint);
+    }
+
+
 
 }

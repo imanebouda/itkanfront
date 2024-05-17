@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CheckListModel } from 'src/app/models/check-list.model'; 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+
 const httpOptions = {
   headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -12,9 +13,9 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-
 export class CheckListService {
   private apiUrl = 'https://localhost:44305/api/ChecklistAudit';
+  private typeChecklistUrl = 'https://localhost:44305/api/TypeCheckListAudit'; // API endpoint for types
 
   constructor(private http: HttpClient) {}
 
@@ -26,8 +27,8 @@ export class CheckListService {
       return this.http.post<CheckListModel>(this.apiUrl, newCheckList, httpOptions);
   }
 
-  deleteCheckList(id: number, CheckListData: any) {
-      return this.http.delete<any>(`${this.apiUrl}/${id}`, CheckListData)
+  deleteCheckList(id: number) {
+      return this.http.delete<any>(`${this.apiUrl}/${id}`, httpOptions)
           .pipe(
               catchError(this.handleError)
           );
@@ -43,5 +44,15 @@ export class CheckListService {
   }
 
   updateCheckList(id: number, newCheckList: CheckListModel) {
-      return this.http.put<any>(`${this.apiUrl}/${id}`, newCheckList);
-  }}
+      return this.http.put<any>(`${this.apiUrl}/${id}`, newCheckList, httpOptions);
+  }
+
+  getTypeCheckLists() {
+      return this.http.get<any[]>(this.typeChecklistUrl);
+  }
+
+  searchCheckListsByType(typeChecklistId: number) {
+      const params = new HttpParams().set('typeChecklistId', typeChecklistId.toString());
+      return this.http.get<CheckListModel[]>(`${this.apiUrl}/search`, { params });
+  }
+}

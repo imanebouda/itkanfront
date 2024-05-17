@@ -1,112 +1,90 @@
-import { Component } from '@angular/core';
-import { CheckListModel } from '../../../../models/check-list.model';
+import { Component, OnInit } from '@angular/core';
+import { CheckListModel } from 'src/app/models/check-list.model';
 import { CheckListService } from 'src/app/services/AuditServices/check-list.service'; 
-import { Subscription } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
-import { GeneralService } from 'src/app/services/services';
-import { ReactiveFormsModule } from '@angular/forms';
+
 @Component({
-  selector: 'app-list-site-audit',
+  selector: 'app-list-check-list',
   templateUrl: './list-check-list.component.html',
   styleUrls: ['./list-check-list.component.scss']
 })
-export class ListCheckListComponent {
-  checkLists: CheckListModel[];
-  Afficher_params: Subscription;
-  currentCheckList = new CheckListModel();
+export class ListCheckListComponent implements OnInit {
+  checkLists: CheckListModel[] = [];
   is_loading: boolean = true;
-  FormmulaireRecherche: FormGroup;
-  categorieList: any = [];
-  public generalService: GeneralService;
-  skip: any = 0;
-    take: any = 10;
-    order: any = 'DESC';
-    colone: any = 'ID';
-    totalRecords: any = 0;
-    listDeclaration: any[] = [];
-    formulaireRecherche: FormGroup;
-    detailProcessus :any ;
-    canActivate :any ;
-    imageUrl: any = 'assets/layout/images/user-cicrle.svg';
-    selectedOdsToPrint: any;
+  formulaireRecherche: FormGroup;
+  typeChecklistList: any[] = [];
+
+  constructor(private checkListservice: CheckListService) {}
   
-    Header_info: any;
-    if_show_ajouter: boolean = false;
-    if_show_modifier: boolean = false;
-    data_selected_ddp: any;
-    if_show_detail: boolean = false;
-    data_selected_phrasier: any;
-    data_selected_processus: any;
-    NamePilote: string ;
-    processesWithPilots: any[]=[];
-    typeChecklistList: any;
-  constructor(private checkListservice: CheckListService) {
-      
-  }
   ngOnInit(): void {
-    this.DisplayCheckListAudit();
+    this.initializeForm();
     this.loadCheckLists();
-    this.formulaireRecherche = new FormGroup({
-      code: new FormControl(''), // Vous pouvez fournir une valeur par défaut si nécessaire
-      titre: new FormControl(''),
-      typeChecklist: new FormControl('')
-    });
-    
+    this.loadTypeCheckLists();
   }
-  SearchCheckListAudit() {
-  //this.skip = 0;
- // this.take = 10;
-  setTimeout(() => {
-      this.DisplayCheckListAudit();
-  }, 100);
-}
-ClearSearch(){}
-DisplayCheckListAudit() {
- 
-  
-}
 
-loadCheckLists() {
-  this.checkListservice.CheckListList().subscribe(
-    checkLists => {
-      this.checkLists = checkLists;
-      this.totalRecords = this.checkLists.length;
-      this.is_loading = false;
-    },
-    error => {
-      console.error('Error fetching checkLists:', error);
-      this.is_loading = false;
-    }
-  );
-}
-
-  deleteCheckList(checkListData: CheckListModel): void {
-      this.checkListservice.deleteCheckList(checkListData.id, checkListData)
-          .subscribe(
-              (response: any) => {
-                  console.log('CheckList supprimé avec succès', response);
-                  // Faire quelque chose avec la réponse si nécessaire
-              },
-              (error: any) => {
-                  console.error('Erreur lors de la suppression du CheckList', error);
-                  // Gérer l'erreur si nécessaire
-              }
-          );
-          
-  }
-  searchCheckLists(): void {
-
-  }
-  clearSearch(): void {
-  
-  }
   initializeForm(): void {
     this.formulaireRecherche = new FormGroup({
-      code: new FormControl(''),
-      titre: new FormControl(''),
       typeChecklist: new FormControl('')
     });
   }
 
-  
+  loadCheckLists(): void {
+    this.checkListservice.CheckListList().subscribe(
+      checkLists => {
+        this.checkLists = checkLists;
+        this.is_loading = false;
+      },
+      error => {
+        console.error('Error fetching checkLists:', error);
+        this.is_loading = false;
+      }
+    );
+  }
+
+  loadTypeCheckLists(): void {
+    this.checkListservice.getTypeCheckLists().subscribe(
+      typeChecklists => {
+        this.typeChecklistList = typeChecklists.map(tc => ({ label: tc.type, value: tc.id }));
+      },
+      error => {
+        console.error('Error fetching type checklists:', error);
+      }
+    );
+  }
+
+  searchCheckLists(): void {
+    const typeChecklistId = this.formulaireRecherche.get('typeChecklist')?.value;
+    if (typeChecklistId) {
+      this.is_loading = true;
+      this.checkListservice.searchCheckListsByType(typeChecklistId).subscribe(
+        checkLists => {
+          this.checkLists = checkLists;
+          this.is_loading = false;
+        },
+        error => {
+          console.error('Error searching checkLists:', error);
+          this.is_loading = false;
+        }
+      );
+    } else {
+      this.loadCheckLists();
+    }
+  }
+
+  clearSearch(): void {
+    this.formulaireRecherche.reset();
+    this.loadCheckLists();
+  }
+
+  deleteCheckList(checkListData: CheckListModel): void {
+    this.checkListservice.deleteCheckList(checkListData.id).subscribe(
+      response => {
+        console.log('CheckList deleted successfully', response);
+        this.loadCheckLists(); // Refresh the list after deletion
+      },
+      error => {
+        console.error('Error deleting CheckList', error);
+      }
+    );
+  }  
 }

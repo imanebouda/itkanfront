@@ -7,5 +7,6 @@ export class CheckListModel{
     code !: string;
     description !: string;
     //Audit?: AuditModel;
-    type : TypeCheckListModel;
+    typeCheckListAudit?: TypeCheckListModel;
+
 }

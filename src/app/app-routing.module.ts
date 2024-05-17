@@ -11,6 +11,7 @@ import {ListConstatComponent} from "./bo/components/Constat/list-constat/list-co
 import {UpdateAuditComponent} from "./bo/components/audit/update-audit/update-audit.component";
 import {UpdateConstatComponent} from "./bo/components/Constat/update-constat/update-constat.component";
 import {GestionAuditComponent} from "./bo/components/audit/gestion-audit/gestion-audit.component";
+import {DropdownComponent} from "./bo/components/audit/dropdown/dropdown.component";
 
 @NgModule({
     imports: [
@@ -138,6 +139,10 @@ import {GestionAuditComponent} from "./bo/components/audit/gestion-audit/gestion
                         {
                             path: 'gestionaudit/:id',
                             component: GestionAuditComponent,
+                        },
+                        {
+                            path: 'ecart',
+                            component: DropdownComponent ,
                         },
 
                         {

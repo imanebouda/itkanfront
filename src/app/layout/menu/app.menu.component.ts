@@ -165,6 +165,15 @@ export class AppMenuComponent implements OnInit {
                         ),
                         ispopup:false
                     },
+                    {
+                        label: 'Constat',
+                        icon: 'pi pi-ban',
+                        routerLink: ['ecart'],
+                        visible: this.generalService.canActivate(
+                            'Utilisateurs-Consulter'
+                        ),
+                        ispopup:false
+                    },
 
                 ],
 

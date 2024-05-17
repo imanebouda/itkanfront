@@ -31,6 +31,7 @@ import { AddConstatComponent } from './bo/components/Constat/add-constat/add-con
 import { ListConstatComponent } from './bo/components/Constat/list-constat/list-constat.component';
 import { UpdateConstatComponent } from './bo/components/Constat/update-constat/update-constat.component';
 import {GestionAuditModule} from "./bo/components/audit/gestion-audit/gestion-audit.module";
+import {DropdownModules} from "./bo/components/audit/dropdown/dropdown.module";
 
 registerLocaleData(localeFr);
 
@@ -44,7 +45,8 @@ registerLocaleData(localeFr);
         BrowserAnimationsModule,
         FileUploadModule,
         NgxExtendedPdfViewerModule,
-        GestionAuditModule
+        GestionAuditModule,
+        DropdownModules
     ],
     providers: [
         { provide: LOCALE_ID, useValue: 'fr-FR' },

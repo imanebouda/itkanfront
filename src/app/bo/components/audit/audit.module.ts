@@ -6,14 +6,16 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AuditRoutingModule } from './audit-routing.module'; // Import du fichier de routage pour l'audit
 import { AddAuditComponent } from './add-audit/add-audit.component'; // Import du composant AddAuditComponent
 import { UpdateAuditComponent } from './update-audit/update-audit.component';
-import { GestionAuditComponent } from './gestion-audit/gestion-audit.component'; // Import du composant UpdateAuditComponent
+import { GestionAuditComponent } from './gestion-audit/gestion-audit.component';
+import { DropdownComponent } from './dropdown/dropdown.component'; // Import du composant UpdateAuditComponent
 
 @NgModule({
     declarations: [
 
 
     
-    GestionAuditComponent
+    GestionAuditComponent,
+           DropdownComponent
   ],
     imports: [
         CommonModule,

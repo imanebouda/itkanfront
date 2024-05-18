@@ -39,6 +39,7 @@ import { AddCheckListComponent } from './bo/components/check-list/add-check-list
 import { ListCheckListComponent } from './bo/components/check-list/list-check-list/list-check-list.component';
 
 import {GestionAuditModule} from "./bo/components/audit/gestion-audit/gestion-audit.module";
+import {DropdownModules} from "./bo/components/audit/dropdown/dropdown.module";
 
 
 registerLocaleData(localeFr);
@@ -53,7 +54,12 @@ registerLocaleData(localeFr);
         BrowserAnimationsModule,
         FileUploadModule,
         NgxExtendedPdfViewerModule,
+<<<<<<< HEAD
         //GestionAuditModule
+=======
+        GestionAuditModule,
+        DropdownModules
+>>>>>>> 6ee2e5ecc5fb39cc43f561a3e9c95b8aa99fd622
     ],
     providers: [
         { provide: LOCALE_ID, useValue: 'fr-FR' },

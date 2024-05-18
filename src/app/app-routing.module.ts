@@ -19,6 +19,7 @@ import { AddCheckListComponent } from './bo/components/check-list/add-check-list
 import { UpdateCheckListComponent } from './bo/components/check-list/update-check-list/update-check-list.component';
 
 import {GestionAuditComponent} from "./bo/components/audit/gestion-audit/gestion-audit.component";
+import {DropdownComponent} from "./bo/components/audit/dropdown/dropdown.component";
 
 
 @NgModule({
@@ -171,6 +172,10 @@ import {GestionAuditComponent} from "./bo/components/audit/gestion-audit/gestion
                         {
                             path: 'gestionaudit/:id',
                             component: GestionAuditComponent,
+                        },
+                        {
+                            path: 'ecart',
+                            component: DropdownComponent ,
                         },
 
 

@@ -10,8 +10,17 @@ import {AddConstatComponent} from "./bo/components/Constat/add-constat/add-const
 import {ListConstatComponent} from "./bo/components/Constat/list-constat/list-constat.component";
 import {UpdateAuditComponent} from "./bo/components/audit/update-audit/update-audit.component";
 import {UpdateConstatComponent} from "./bo/components/Constat/update-constat/update-constat.component";
+
+import { AddSiteAuditComponent } from './bo/components/site-audit/add-site-audit/add-site-audit.component';
+import { ListSiteAuditComponent } from './bo/components/site-audit/list-site-audit/list-site-audit.component';
+import { UpdateSiteAuditComponent } from './bo/components/site-audit/update-site-audit/update-site-audit.component';
+import { ListCheckListComponent } from './bo/components/check-list/list-check-list/list-check-list.component';
+import { AddCheckListComponent } from './bo/components/check-list/add-check-list/add-check-list.component';
+import { UpdateCheckListComponent } from './bo/components/check-list/update-check-list/update-check-list.component';
+
 import {GestionAuditComponent} from "./bo/components/audit/gestion-audit/gestion-audit.component";
 import {DropdownComponent} from "./bo/components/audit/dropdown/dropdown.component";
+
 
 @NgModule({
     imports: [
@@ -137,6 +146,30 @@ import {DropdownComponent} from "./bo/components/audit/dropdown/dropdown.compone
                             component: AddConstatComponent,
                         },
                         {
+                            path: 'addSiteAudit',
+                            component: AddSiteAuditComponent,
+                        },
+                        {
+                            path: 'listSiteAudit',
+                            component: ListSiteAuditComponent,
+                        },
+                        {
+                            path: 'editSiteAudit/:id',
+                            component: UpdateSiteAuditComponent,
+                        },
+                        {
+                            path: 'listCheckList',
+                            component: ListCheckListComponent,
+                        },
+                        {
+                            path: 'addCheckList',
+                            component: AddCheckListComponent,
+                        },
+                        {
+                            path: 'editCheckList/:id',
+                            component: UpdateCheckListComponent,
+                        },
+                        {
                             path: 'gestionaudit/:id',
                             component: GestionAuditComponent,
                         },
@@ -144,6 +177,7 @@ import {DropdownComponent} from "./bo/components/audit/dropdown/dropdown.compone
                             path: 'ecart',
                             component: DropdownComponent ,
                         },
+
 
                         {
                             path: 'Indicateurs',

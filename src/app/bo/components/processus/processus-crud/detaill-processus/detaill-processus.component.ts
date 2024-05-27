@@ -8,6 +8,7 @@ import { ProcessusService } from 'src/app/services/processus/processus.service';
 import { GeneralService } from 'src/app/services/services';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+import {DataService} from "../../../../../services/dataShared/data.service";
 
 
 @Component({
@@ -41,13 +42,14 @@ export class DetaillProcessusComponent implements OnInit {
         private router: Router,
         private pusherService: PusherService,
         private menuVisibilityService : MenuVisibilityService,
-    ) { 
+        private dataSharedService :  DataService
+    ) {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
               console.log(this.shouldShowMenu(event.url))
               this.menuVisibilityService.setMenuVisibility(this.shouldShowMenu(event.url));
             }
-          });     
+          });
      }
 
 
@@ -59,8 +61,8 @@ export class DetaillProcessusComponent implements OnInit {
         });
     }
 
-    shouldShowMenu(url: string): boolean {    
-      return url.startsWith('/processus/detail'); 
+    shouldShowMenu(url: string): boolean {
+      return url.startsWith('/processus/detail');
     }
 
 
@@ -127,7 +129,7 @@ export class DetaillProcessusComponent implements OnInit {
                         }
                     }); // end subscribe
             } // fin if result swal
-        }); // fin then swal 
+        }); // fin then swal
     }
 
 

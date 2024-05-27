@@ -51,7 +51,7 @@
 <p-fieldset *ngIf="detailProcesDocuments && detailProcessus" legend="Détail Document" [toggleable]="true">
     <div class="summary">
         <div class="p-fluid p-formgrid grid">
-            <div class="field col-4">   
+            <div class="field col-4">
                 <div class="flex center_media mt-2" style="column-gap: 10px;">
                     <ng-container >
                         <i *ngIf="generalService.canActivate('Documents Processus-Télecharger')" pRipple style="cursor: pointer;"
@@ -61,8 +61,8 @@
                             <img *ngIf="detailProcesDocuments?.ExtensionFile === '.docx'" src="./assets/layout/images/icons-word.png"  alt="image icons_word">
                             <img *ngIf="detailProcesDocuments?.ExtensionFile === '.xlsx'" src="./assets/layout/images/icons-excel.png"  alt="image icons_excel">
                             <br>
-                            <label >{{detailProcesDocuments?.Libelle}} {{detailProcesDocuments?.CoPilote}}</label> 
-                        </i>                  
+                            <label >{{detailProcesDocuments?.Libelle}} {{detailProcesDocuments?.CoPilote}}</label>
+                        </i>
                     </ng-container>
                     <ng-container>
                         <i *ngIf="generalService.canActivate('Documents Processus-Modifier') && generalService.canActivatePilote(detailProcesDocuments)"
@@ -90,7 +90,13 @@
                          pButton pRipple class="p-button-rounded p-button-warning" icon="pi pi-lock-open" tooltipPosition="right"
                          pTooltip="Archiver le document  : {{detailProcesDocuments?.Libelle}} ?" (click)="StatutAnProcessusDocuments(detailProcesDocuments )">
                         </i>
-                      </ng-container> 
+                        <!-- Dans votre template HTML -->
+
+
+
+                    </ng-container>
+
+
                 </div>
             </div>
         </div>
@@ -104,6 +110,11 @@
         tooltipPosition="left" pTooltip="Ajouter un document Processus : {{detailProcesDocuments?.Libelle}}"
         (click)="ShowFormulaire('Ajouté')">
         </i>
+
+        <a class="p-link" routerLink="/listCheckList">
+            <!-- Ajoutez ici l'icône de PrimeNG -->
+            <i class="pi pi-arrow-right"></i> CHECKLIST
+        </a>
     </ng-container>
 </p-fieldset>
 
@@ -117,7 +128,7 @@
     <app-update-proces-documents [data_selected_Dp]="detailProcesDocuments" *ngIf="if_show_modifier"
         (FermerPopUp)="CloseUpdate($event)">
     </app-update-proces-documents>
-</p-dialog> 
+</p-dialog>
  <!----------------------------------------------------------------------- -->
 <!--                        Le formulaire de l'ajout                         -->
 <!-- ----------------------------------------------------------------------- -->
@@ -128,7 +139,7 @@
         <app-add-proces-documents *ngIf="if_show_ajouter" (FermerPopUp)="CloseAjouter($event)">
         </app-add-proces-documents>
     </p-card>
-</p-dialog> 
+</p-dialog>
 
 
 

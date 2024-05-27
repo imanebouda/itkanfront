@@ -6,6 +6,7 @@ export const environment = {
     /*                                 LES ROUTES                                 */
     /* -------------------------------------------------------------------------- */
     API_BASE_URL_GENERAL: `${api_url}/api/`,
+    
     API_BASE_URL_USERS: `${api_url}/api_user/`,
     API_BASE_URL_PARAMETRAGE: `${api_url}/api_parametrage/`,
     API_BASE_URL_ImagesEssai: `${api_url}/images/ficheessais/`,

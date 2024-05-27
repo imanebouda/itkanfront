@@ -6,6 +6,7 @@ export class CheckListModel{
     niveau !: string;
     code !: string;
     description !: string;
+    typechecklist_id !: number;
     //Audit?: AuditModel;
     typeCheckListAudit?: TypeCheckListModel;
 

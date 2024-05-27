@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { NotfoundComponent } from './bo/components/notfound/notfound.component';
 import { CountryService } from './bo/service/country.service';
-import { CustomerService} from './bo/service/customer.service';
+import { CustomerService } from './bo/service/customer.service';
 import { EventService } from './bo/service/event.service';
 import { IconService } from './bo/service/icon.service';
 import { NodeService } from './bo/service/node.service';
@@ -16,8 +16,6 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { NgxPrintModule } from 'ngx-print';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCALE_ID } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/fr';
 import { ProcedureComponent } from './bo/components/procedure/procedure.component';
 import { ProcObjectifsComponent } from './bo/components/proc-objectifs/proc-objectifs.component';
 import { IndicateurComponent } from './bo/components/indicateur/indicateur.component';
@@ -30,21 +28,34 @@ import { UpdateAuditComponent } from './bo/components/audit/update-audit/update-
 import { AddConstatComponent } from './bo/components/Constat/add-constat/add-constat.component';
 import { ListConstatComponent } from './bo/components/Constat/list-constat/list-constat.component';
 import { UpdateConstatComponent } from './bo/components/Constat/update-constat/update-constat.component';
-
 import { AddSiteAuditComponent } from './bo/components/site-audit/add-site-audit/add-site-audit.component';
 import { ListSiteAuditComponent } from './bo/components/site-audit/list-site-audit/list-site-audit.component';
 import { UpdateSiteAuditComponent } from './bo/components/site-audit/update-site-audit/update-site-audit.component';
 import { UpdateCheckListComponent } from './bo/components/check-list/update-check-list/update-check-list.component';
 import { AddCheckListComponent } from './bo/components/check-list/add-check-list/add-check-list.component';
 import { ListCheckListComponent } from './bo/components/check-list/list-check-list/list-check-list.component';
+import { GestionAuditModule } from "./bo/components/audit/gestion-audit/gestion-audit.module";
+import { DropdownModules } from "./bo/components/audit/dropdown/dropdown.module";
 
-import {GestionAuditModule} from "./bo/components/audit/gestion-audit/gestion-audit.module";
-import {DropdownModules} from "./bo/components/audit/dropdown/dropdown.module";
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
+
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { MessageModule } from 'primeng/message';
+import { TooltipModule } from 'primeng/tooltip';
+
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr);
 
 @NgModule({
-    declarations: [AppComponent,HomeComponent, NotfoundComponent , ProcObjectifsComponent , ProcedureComponent, IndicateurComponent, LeadershipComponent, AddAuditComponent, ListAuditComponent, UpdateAuditComponent, AddConstatComponent, ListConstatComponent, UpdateConstatComponent, AddSiteAuditComponent, ListSiteAuditComponent, UpdateSiteAuditComponent, UpdateCheckListComponent, AddCheckListComponent, ListCheckListComponent ],
+    declarations: [AppComponent,AppComponent,UpdateCheckListComponent,ListCheckListComponent, HomeComponent, NotfoundComponent, ProcObjectifsComponent, ProcedureComponent, IndicateurComponent, LeadershipComponent, AddAuditComponent, ListAuditComponent, UpdateAuditComponent, AddConstatComponent, ListConstatComponent, UpdateConstatComponent, AddSiteAuditComponent, ListSiteAuditComponent, UpdateSiteAuditComponent, UpdateCheckListComponent, AddCheckListComponent, ListCheckListComponent],
     imports: [
         AppRoutingModule,
         AppLayoutModule,
@@ -53,17 +64,21 @@ registerLocaleData(localeFr);
         BrowserAnimationsModule,
         FileUploadModule,
         NgxExtendedPdfViewerModule,
-<<<<<<< HEAD
-        GestionAuditModule,
-        DropdownModules
-=======
-<<<<<<< HEAD
+        BrowserModule,
+     FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule, // Ajoutez cette ligne
+    DialogModule,
+    ButtonModule,
+    RippleModule,
+    InputTextModule,
+    DropdownModule,
+    MessageModule,
+    TooltipModule,
+
         //GestionAuditModule
-=======
-        GestionAuditModule,
-        DropdownModules
->>>>>>> 6ee2e5ecc5fb39cc43f561a3e9c95b8aa99fd622
->>>>>>> 8917fd65134c053cab607de3a9e712efa839132f
+       // GestionAuditModule,
+       // DropdownModules
     ],
     providers: [
         { provide: LOCALE_ID, useValue: 'fr-FR' },
@@ -75,8 +90,10 @@ registerLocaleData(localeFr);
         NodeService,
         PhotoService,
         MessageService,
+        
     ],
     bootstrap: [AppComponent],
-    schemas: [NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA],
+    schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {
+}

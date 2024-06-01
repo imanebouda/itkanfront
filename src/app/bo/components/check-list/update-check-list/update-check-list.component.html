@@ -2,24 +2,25 @@
   <form [formGroup]="updateCheckListForm" (ngSubmit)="submitForm()">
     <div class="form-group">
       <label for="name">Nom</label>
-      <input type="text" class="form-control" id="name" formControlName="name">
+      <input type="text" class="form-control" id="name" formControlName="name" [(ngModel)]="selectedCheckList.name">
     </div>
     <div class="form-group">
       <label for="niveau">Niveau</label>
-      <input type="text" class="form-control" id="niveau" formControlName="niveau">
+      <input type="text" class="form-control" id="niveau" formControlName="niveau" [(ngModel)]="selectedCheckList.niveau">
     </div>
     <div class="form-group">
       <label for="code">Code</label>
-      <input type="text" class="form-control" id="code" formControlName="code">
+      <input type="text" class="form-control" id="code" formControlName="code" [(ngModel)]="selectedCheckList.code">
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea class="form-control" id="description" formControlName="description"></textarea>
+      <textarea class="form-control" id="description" formControlName="description" [(ngModel)]="selectedCheckList.description"></textarea>
     </div>
+    
     <div class="form-group">
       <label for="typeCheckListAudit">Type de Checklist</label>
       <select class="form-control" id="typechecklist_id" formControlName="typechecklist_id">
-        <option *ngFor="let type of typeCheckListOptions" [ngValue]="type.id">{{ type.type }}</option>
+        <option *ngFor="let type of typeCheckListOptions"  [(ngModel)]="selectedCheckList.typechecklist_id">{{ type.type }}</option>
       </select>
     </div>
     

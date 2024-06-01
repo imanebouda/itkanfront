@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
+/*import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -44,7 +44,7 @@ import {DropdownModules} from "./bo/components/audit/dropdown/dropdown.module";
 registerLocaleData(localeFr);
 
 @NgModule({
-    declarations: [AppComponent,HomeComponent, NotfoundComponent , ProcObjectifsComponent , ProcedureComponent, IndicateurComponent, LeadershipComponent, AddAuditComponent, ListAuditComponent, UpdateAuditComponent, AddConstatComponent, ListConstatComponent, UpdateConstatComponent, AddSiteAuditComponent, ListSiteAuditComponent, UpdateSiteAuditComponent, UpdateCheckListComponent, AddCheckListComponent, ListCheckListComponent ],
+    declarations: [AppComponent,HomeComponent, NotfoundComponent , ProcObjectifsComponent , ProcedureComponent, IndicateurComponent, LeadershipComponent, AddAuditComponent, ListAuditComponent, UpdateAuditComponent, AddConstatComponent, ListConstatComponent, UpdateConstatComponent, AddSiteAuditComponent, ListSiteAuditComponent/*, UpdateSiteAuditComponent, UpdateCheckListComponent, AddCheckListComponent, ListCheckListComponent ],
     imports: [
         AppRoutingModule,
         AppLayoutModule,
@@ -53,17 +53,13 @@ registerLocaleData(localeFr);
         BrowserAnimationsModule,
         FileUploadModule,
         NgxExtendedPdfViewerModule,
-<<<<<<< HEAD
-        GestionAuditModule,
-        DropdownModules
-=======
-<<<<<<< HEAD
+
+       
+
+
         //GestionAuditModule
-=======
-        GestionAuditModule,
-        DropdownModules
->>>>>>> 6ee2e5ecc5fb39cc43f561a3e9c95b8aa99fd622
->>>>>>> 8917fd65134c053cab607de3a9e712efa839132f
+       
+
     ],
     providers: [
         { provide: LOCALE_ID, useValue: 'fr-FR' },
@@ -79,4 +75,4 @@ registerLocaleData(localeFr);
     bootstrap: [AppComponent],
     schemas: [NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule { }*/

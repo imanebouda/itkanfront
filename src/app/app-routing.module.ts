@@ -20,6 +20,7 @@ import { UpdateCheckListComponent } from './bo/components/check-list/update-chec
 
 import {GestionAuditComponent} from "./bo/components/audit/gestion-audit/gestion-audit.component";
 import {DropdownComponent} from "./bo/components/audit/dropdown/dropdown.component";
+import {DetailAuditComponent} from "./bo/components/audit/detail-audit/detail-audit.component";
 
 
 @NgModule({
@@ -134,6 +135,10 @@ import {DropdownComponent} from "./bo/components/audit/dropdown/dropdown.compone
                             component: UpdateAuditComponent,
                         },
                         {
+                            path: 'detailAudit/:id',
+                            component: DetailAuditComponent ,
+                        },
+                        {
                             path: 'editconstat/:id',
                             component: UpdateConstatComponent,
                         },
@@ -177,6 +182,7 @@ import {DropdownComponent} from "./bo/components/audit/dropdown/dropdown.compone
                             path: 'ecart',
                             component: DropdownComponent ,
                         },
+
 
 
                         {

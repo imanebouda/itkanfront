@@ -7,21 +7,24 @@ import { AuditRoutingModule } from './audit-routing.module'; // Import du fichie
 import { AddAuditComponent } from './add-audit/add-audit.component'; // Import du composant AddAuditComponent
 import { UpdateAuditComponent } from './update-audit/update-audit.component';
 import { GestionAuditComponent } from './gestion-audit/gestion-audit.component';
-import { DropdownComponent } from './dropdown/dropdown.component'; // Import du composant UpdateAuditComponent
+import { DropdownComponent } from './dropdown/dropdown.component';
+import { DetailAuditComponent } from './detail-audit/detail-audit.component'; // Import du composant UpdateAuditComponent
 
 @NgModule({
     declarations: [
 
 
-    
+
     GestionAuditComponent,
-           DropdownComponent
+           DropdownComponent,
+
   ],
     imports: [
         CommonModule,
         NgxPrintModule,
         SharedModule,
-        AuditRoutingModule, // Utilisation du module de routage pour l'audit
+        AuditRoutingModule,
+        // Utilisation du module de routage pour l'audit
     ],
     providers: [{ provide: LOCALE_ID, useValue: "fr-FR" }, DatePipe]
 })

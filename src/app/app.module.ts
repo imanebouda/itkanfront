@@ -40,11 +40,12 @@ import { ListCheckListComponent } from './bo/components/check-list/list-check-li
 
 import {GestionAuditModule} from "./bo/components/audit/gestion-audit/gestion-audit.module";
 import {DropdownModules} from "./bo/components/audit/dropdown/dropdown.module";
+import {DetailAuditComponent} from "./bo/components/audit/detail-audit/detail-audit.component";
 
 registerLocaleData(localeFr);
 
 @NgModule({
-    declarations: [AppComponent,HomeComponent, NotfoundComponent , ProcObjectifsComponent , ProcedureComponent, IndicateurComponent, LeadershipComponent, AddAuditComponent, ListAuditComponent, UpdateAuditComponent, AddConstatComponent, ListConstatComponent, UpdateConstatComponent, AddSiteAuditComponent, ListSiteAuditComponent, UpdateSiteAuditComponent, UpdateCheckListComponent, AddCheckListComponent, ListCheckListComponent ],
+    declarations: [AppComponent,HomeComponent, NotfoundComponent , ProcObjectifsComponent , ProcedureComponent, IndicateurComponent, LeadershipComponent, AddAuditComponent, ListAuditComponent, UpdateAuditComponent, AddConstatComponent, ListConstatComponent, UpdateConstatComponent, AddSiteAuditComponent, ListSiteAuditComponent, UpdateSiteAuditComponent, UpdateCheckListComponent, AddCheckListComponent, ListCheckListComponent,DetailAuditComponent  ],
     imports: [
         AppRoutingModule,
         AppLayoutModule,
@@ -53,18 +54,10 @@ registerLocaleData(localeFr);
         BrowserAnimationsModule,
         FileUploadModule,
         NgxExtendedPdfViewerModule,
-<<<<<<< HEAD
+
         GestionAuditModule,
         DropdownModules
-=======
-<<<<<<< HEAD
-        //GestionAuditModule
-=======
-        GestionAuditModule,
-        DropdownModules
->>>>>>> 6ee2e5ecc5fb39cc43f561a3e9c95b8aa99fd622
->>>>>>> 8917fd65134c053cab607de3a9e712efa839132f
-    ],
+  ],
     providers: [
         { provide: LOCALE_ID, useValue: 'fr-FR' },
         { provide: LocationStrategy, useClass: HashLocationStrategy }, // Correction ici

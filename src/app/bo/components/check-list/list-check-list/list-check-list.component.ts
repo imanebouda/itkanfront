@@ -131,4 +131,35 @@ export class ListCheckListComponent implements OnInit {
     const modal = Modal.getInstance(this.addModal.nativeElement);
     modal.hide();
   }
+
+
+
+
+    saveUserChoice(): void {
+        if (this.selectedOption) {
+            // Vérifiez si une checklist est sélectionnée
+            if (!this.selectedCheckList) {
+                console.error('Veuillez sélectionner une liste de contrôle.');
+                return;
+            }
+
+            // Récupérez l'ID de la checklist sélectionnée
+            const selectedCheckListId = this.selectedCheckList.id;
+
+            // Enregistrez l'ID de la checklist sélectionnée et l'option choisie
+            this.checkListService.saveUserChoice(selectedCheckListId, this.selectedOption).subscribe(
+                (response) => {
+                    console.log('Choix enregistré avec succès.');
+                    // Réinitialiser les valeurs après l'enregistrement réussi si nécessaire
+                    this.selectedOption = '';
+                },
+                (error: any) => {
+                    console.error('Erreur lors de l\'enregistrement du choix :', error);
+                }
+            );
+        } else {
+            console.error('Veuillez sélectionner une option.');
+        }
+    }
+
 }

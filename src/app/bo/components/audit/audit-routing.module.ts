@@ -3,7 +3,8 @@ import { RouterModule } from '@angular/router';
 import { AutorisedGuard } from 'src/app/services/guard/autorised.guard';
 import { ListAuditComponent } from './list-audit/list-audit.component'; // Import du composant AuditListComponent
 import { AddAuditComponent } from './add-audit/add-audit.component'; // Import du composant AddAuditComponent
-import { UpdateAuditComponent } from './update-audit/update-audit.component'; // Import du composant UpdateAuditComponent
+import { UpdateAuditComponent } from './update-audit/update-audit.component';
+import {DetailAuditComponent} from "./detail-audit/detail-audit.component"; // Import du composant UpdateAuditComponent
 
 @NgModule({
     imports: [
@@ -34,6 +35,8 @@ import { UpdateAuditComponent } from './update-audit/update-audit.component'; //
                         canActivate: [AutorisedGuard],
                         data: { role: 'Audit-Modifier' }, // Rôle nécessaire pour accéder à cette fonctionnalité
                     },
+
+
                     { path: '**', redirectTo: 'list', pathMatch: 'full' },
                 ],
             },

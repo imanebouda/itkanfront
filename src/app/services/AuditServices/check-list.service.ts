@@ -22,7 +22,7 @@ export class CheckListService {
   addCheckList(newCheckList: any): Observable<any> {
     const typeCheckListAuditId = newCheckList.typechecklist_id ? newCheckList.typechecklist_id : null;
     const typeCheckListAuditType = newCheckList.typeCheckListAudit ? newCheckList.typeCheckListAudit.type : null;
-    
+
     // Créer un objet avec les données mises à jour, y compris typeCheckListAudit
     const addData = {
       name: newCheckList.name,
@@ -35,7 +35,7 @@ export class CheckListService {
         type: "string"
       }
     };
-  
+
     // Envoyer la requête PUT avec les données mises à jour
     return this.http.post<any>(`${this.apiUrl}`, addData, this.httpOptions).pipe(
       catchError(this.handleError)
@@ -62,7 +62,7 @@ export class CheckListService {
     // Extraire l'ID et le type du typeCheckListAudit du formulaire mis à jour
     const typeCheckListAuditId = updatedCheckList.typechecklist_id ? updatedCheckList.typechecklist_id : null;
     const typeCheckListAuditType = updatedCheckList.typeCheckListAudit ? updatedCheckList.typeCheckListAudit.type : null;
-    
+
     // Créer un objet avec les données mises à jour, y compris typeCheckListAudit
     const updatedData = {
       id: updatedCheckList.id,
@@ -76,14 +76,14 @@ export class CheckListService {
         type: "string"
       }
     };
-  
+
     // Envoyer la requête PUT avec les données mises à jour
     return this.http.put<any>(`${this.apiUrl}/${id}`, updatedData, this.httpOptions).pipe(
       catchError(this.handleError)
     );
   }
-  
-  
+
+
 
   getTypeCheckLists(): Observable<any[]> {
     return this.http.get<any[]>(this.typeChecklistUrl).pipe(
@@ -110,4 +110,14 @@ export class CheckListService {
       })
     };
   }
+    saveUserChoice(checkListId: number, option: string): Observable<any> {
+        const data = {
+            Choice: option,
+            CheckListAuditId: checkListId
+        };
+
+        return this.http.post<any>('https://localhost:44305/Dropdown/userchoices', data).pipe(
+            catchError(this.handleError)
+        );
+    }
 }

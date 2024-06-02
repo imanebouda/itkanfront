@@ -74,8 +74,16 @@ export class ListAuditComponent {
     );
   }
 
-  deleteAudit(auditData: any): void {
-    // Logic to delete an audit
+  deleteAudit(AuditData: AuditModel): void {
+    this.auditService.deleteAudit(AuditData).subscribe(
+      response => {
+        console.log('Audit deleted successfully', response);
+        this.loadAudits(); // Refresh the list after deletion
+      },
+      error => {
+        console.error('Error deleting Audit', error);
+      }
+    );
   }
 
   closeAddAuditDialog(): void {

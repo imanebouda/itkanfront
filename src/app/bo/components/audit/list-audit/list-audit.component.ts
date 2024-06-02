@@ -11,10 +11,12 @@ import { Modal } from 'bootstrap';
 })
 export class ListAuditComponent {
   @ViewChild('addAuditModal') addModal: ElementRef;
+  @ViewChild('updateAuditModal') updateModal: ElementRef;
 
   formulaireRecherche: FormGroup;
   typeAuditList: any;
   addAudit: AuditModel;
+  selectedAudit: AuditModel;
   audits: AuditModel[] = []; // Initialize as an empty array
   is_loading: boolean = true;
 
@@ -39,6 +41,20 @@ export class ListAuditComponent {
   openAddAuditModal() {
     const modal = new Modal(this.addModal.nativeElement);
     modal.show();
+  }
+  
+  openUpdateDialog(audit: AuditModel): void {
+    console.log('Selected checklist:', audit);
+    this.selectedAudit = audit;
+    const modal = new Modal(this.updateModal.nativeElement);
+    modal.show();
+  }
+  
+  closeUpdateDialog(): void {
+    const modal = Modal.getInstance(this.updateModal.nativeElement);
+    modal.hide();
+    this.selectedAudit = null;
+    this.loadAudits();
   }
 
   clearSearch() {
@@ -65,5 +81,6 @@ export class ListAuditComponent {
   closeAddAuditDialog(): void {
     const modal = Modal.getInstance(this.addModal.nativeElement);
     modal.hide();
+    this.loadAudits();
   }
 }

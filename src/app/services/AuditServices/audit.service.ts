@@ -125,11 +125,14 @@ export class AuditService {
 
 
    }*/
-    updateAudit(id: number, newAudit: AuditModel) {
-        // Implémentation de la mise à jour de l'audit
-        console.log('update audit',newAudit);
-        return this.http.put<any>(`${this.apiUrl}/${id}`, newAudit);
-    }
+   updateAudit(id: number, newAudit: AuditModel) {
+    console.log('update audit', newAudit);
+    return this.http.put<any>(`${this.apiUrl}/${id}`, newAudit, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
 
 

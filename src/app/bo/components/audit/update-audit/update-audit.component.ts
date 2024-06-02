@@ -1,44 +1,57 @@
-import {Component, OnInit} from '@angular/core';
-import {AuditModel} from "../../../../models/audit.model";
-import {AuditService} from "../../../../services/AuditServices/audit.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuditModel } from 'src/app/models/audit.model';
+import { AuditService } from 'src/app/services/AuditServices/audit.service';
 
 @Component({
   selector: 'app-update-audit',
   templateUrl: './update-audit.component.html',
   styleUrls: ['./update-audit.component.scss']
 })
-export class UpdateAuditComponent implements OnInit{
-    currentAudit=new AuditModel();
+export class UpdateAuditComponent implements OnInit {
+  @Input() selectedAudit: AuditModel;
+  @Output() closeUpdateDialog = new EventEmitter<void>();
 
-    constructor(
-       private  auditService:AuditService,
-       private activatedRoute :ActivatedRoute,
-       private router : Router
-        ) {
+  updateAuditForm: FormGroup;
+  is_loading = false;
+  errorMessage: string = '';
 
+  constructor(
+    private fb: FormBuilder,
+    private auditService: AuditService
+  ) {
+    this.updateAuditForm = this.fb.group({
+        nomAudit: ['', Validators.required],
+        typeAudit: ['', Validators.required],
+        dateAudit: ['', Validators.required],
+        status: ['', Validators.required],
+        description: ['', Validators.required]
+    });
+  }
 
+  ngOnInit(): void {
+    if (this.selectedAudit) {
+      this.updateAuditForm.patchValue(this.selectedAudit);
     }
-    ngOnInit() {
-       // this.currentAudit=this.auditService.editAudit(this.activatedRoute.snapshot.params['id']);
-        this.auditService.editAudit(this.activatedRoute.snapshot.params['id']).subscribe(p=>{
-            this.currentAudit=p;
-           // this.newCategoryId = this.currentProduct.category?.idCatecory!;
-        });
+  }
+
+  submitForm() {
+    if (this.updateAuditForm.valid) {
+      this.is_loading = true;
+      const formData = this.updateAuditForm.value;
+
+      this.auditService.updateAudit(this.selectedAudit.id, formData).subscribe(
+        () => {
+          this.is_loading = false;
+          // Logic to handle successful update, e.g., close modal or notify parent component
+        },
+        error => {
+          this.is_loading = false;
+          this.errorMessage = 'Error updating audit: ' + error.message;
+        }
+      );
+    } else {
+      this.errorMessage = 'Invalid form!';
     }
-    updateAudit(){
-        //this.auditService.updateAudit(this.currentAudit);
-       // this.currentProduct.category=this.categories.find(c=>c.idCatecory==this.newCategoryId);
-       // this.auditService.updateAudit(this.currentAudit).subscribe(p =>{
-            //this.router.navigate(['products-list'])
-
-        //})
-
-        this.auditService.updateAudit(this.currentAudit.id, this.currentAudit).subscribe(p => {
-            // Traitement des résultats de la mise à jour
-            this.router.navigate(['list']);
-        });
-    }
-
-
+  }
 }

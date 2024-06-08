@@ -7,15 +7,13 @@ import { AuditRoutingModule } from './audit-routing.module'; // Import du fichie
 import { AddAuditComponent } from './add-audit/add-audit.component'; // Import du composant AddAuditComponent
 import { UpdateAuditComponent } from './update-audit/update-audit.component';
 import { GestionAuditComponent } from './gestion-audit/gestion-audit.component';
-import { DropdownComponent } from './dropdown/dropdown.component'; // Import du composant UpdateAuditComponent
 
 @NgModule({
     declarations: [
 
 
     
-    GestionAuditComponent,
-           DropdownComponent
+    GestionAuditComponent
   ],
     imports: [
         CommonModule,

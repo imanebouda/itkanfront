@@ -35,7 +35,6 @@ import { UpdateCheckListComponent } from './bo/components/check-list/update-chec
 import { AddCheckListComponent } from './bo/components/check-list/add-check-list/add-check-list.component';
 import { ListCheckListComponent } from './bo/components/check-list/list-check-list/list-check-list.component';
 import { GestionAuditModule } from "./bo/components/audit/gestion-audit/gestion-audit.module";
-import { DropdownModules } from "./bo/components/audit/dropdown/dropdown.module";
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -52,6 +51,7 @@ import { TooltipModule } from 'primeng/tooltip';
 
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { AuditService } from './services/AuditServices/audit.service';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -90,6 +90,7 @@ registerLocaleData(localeFr);
         NodeService,
         PhotoService,
         MessageService,
+        AuditService
         
     ],
     bootstrap: [AppComponent],

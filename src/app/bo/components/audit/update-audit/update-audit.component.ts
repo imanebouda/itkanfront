@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuditModel } from 'src/app/models/audit.model';
 import { AuditService } from 'src/app/services/AuditServices/audit.service';
@@ -8,24 +8,26 @@ import { AuditService } from 'src/app/services/AuditServices/audit.service';
   templateUrl: './update-audit.component.html',
   styleUrls: ['./update-audit.component.scss']
 })
+
 export class UpdateAuditComponent implements OnInit {
   @Input() selectedAudit: AuditModel;
   @Output() closeUpdateDialog = new EventEmitter<void>();
-
   updateAuditForm: FormGroup;
   is_loading = false;
   errorMessage: string = '';
+  typeAuditOptions: any[] = [];
 
   constructor(
     private fb: FormBuilder,
     private auditService: AuditService
   ) {
     this.updateAuditForm = this.fb.group({
-        nomAudit: ['', Validators.required],
-        typeAudit: ['', Validators.required],
-        dateAudit: ['', Validators.required],
-        status: ['', Validators.required],
-        description: ['', Validators.required]
+      nomAudit: ['', Validators.required],
+      dateAudit: ['', Validators.required],
+      status: ['', Validators.required],
+      description: ['', Validators.required],
+      typeAuditId: [null, Validators.required],
+      typeAudit: [null, Validators.required]
     });
   }
 
@@ -33,6 +35,18 @@ export class UpdateAuditComponent implements OnInit {
     if (this.selectedAudit) {
       this.updateAuditForm.patchValue(this.selectedAudit);
     }
+    this.loadTypeAudits();
+  }
+
+  loadTypeAudits(): void { console.log("nta hna")
+    this.auditService.getTypeAudits().subscribe(
+      typeAudits => {
+        this.typeAuditOptions = typeAudits;
+      },
+      error => {
+        console.error('Error fetching type audits:', error);
+      }
+    );
   }
 
   submitForm() {
@@ -40,10 +54,31 @@ export class UpdateAuditComponent implements OnInit {
       this.is_loading = true;
       const formData = this.updateAuditForm.value;
 
-      this.auditService.updateAudit(this.selectedAudit.id, formData).subscribe(
+      // Convertir les valeurs en nombres
+      const typeAuditId = parseInt(formData.typeAuditId, 10); // Convertir l'identifiant en nombre entier
+      const typeAuditType = formData.typeAuditId; // Utiliser directement la valeur de typeAuditId pour le type
+
+      // Créer un objet conforme à la structure de la requête envoyée par Swagger
+      const requestBody = {
+        id: this.selectedAudit.id,
+        nomAudit: formData.nomAudit,
+        dateAudit: formData.dateAudit,
+        status: formData.status,
+        description: formData.description,
+        typeAuditId: typeAuditId, // Utiliser l'identifiant converti
+        /*typeAudit: {
+          id: formData.typeAuditId,
+          type: typeAuditType // Utiliser directement la valeur de typeAuditId
+        }*/
+      };
+
+      console.log("Audit ID:", typeAuditId);
+      console.log("Audit Type:", typeAuditType);
+
+      this.auditService.updateAudit(this.selectedAudit.id, requestBody).subscribe(
         () => {
           this.is_loading = false;
-          // Logic to handle successful update, e.g., close modal or notify parent component
+          this.closeUpdateDialog.emit();
         },
         error => {
           this.is_loading = false;
@@ -52,6 +87,20 @@ export class UpdateAuditComponent implements OnInit {
       );
     } else {
       this.errorMessage = 'Invalid form!';
+      console.log(this.updateAuditForm);
     }
+  }
+
+  closeDialog() {
+    this.closeUpdateDialog.emit(); // Emit event to close the dialog
+  }
+
+  // Méthode pour mettre à jour les champs typeAuditId et typeAudit.id simultanément
+  updateTypeAudit(event: any) {
+    const selectedTypeId = event.target.value;
+    this.updateAuditForm.patchValue({
+      typeAuditId: selectedTypeId,
+      typeAudit: { id: selectedTypeId }
+    });
   }
 }

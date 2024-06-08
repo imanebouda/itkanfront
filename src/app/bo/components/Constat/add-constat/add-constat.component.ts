@@ -19,15 +19,15 @@ export class AddConstatComponent {
         private constatService: ConstatService,
         private auditService: AuditService
     ) {
-        this.loadAudits();
+      //  this.loadAudits();
     }
 
-    loadAudits() {
+  /*  loadAudits() {
         this.auditService.auditList().subscribe(
             audits => this.audits = audits,
             error => console.error('Error fetching audits:', error)
         );
-    }
+    }*/
 
     addConstat() {
         this.constatService.addConstat(this.newConstat).subscribe(() => {

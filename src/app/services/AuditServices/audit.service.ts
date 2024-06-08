@@ -1,144 +1,130 @@
 import { Injectable } from '@angular/core';
-import {AuditModel} from "../../models/audit.model";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {catchError, map} from "rxjs/operators";
-import {throwError} from "rxjs";
-const httpOptions ={
-    headers:new HttpHeaders({
-        'content-Type':'application/json'
-    })
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
-};
 @Injectable({
   providedIn: 'root'
 })
 export class AuditService {
-    private apiUrl = 'https://localhost:44305/api/Audit';
+  private apiUrl = `${environment.API_BASE_URL_GENERAL}Audit`;
+  private typeAuditUrl = `${environment.API_BASE_URL_GENERAL}TypeAudit`;
 
+  constructor(private http: HttpClient) {}
 
-
-
-    audits :AuditModel[];
-  audit! :AuditModel;
-  constructor(private http: HttpClient) {
-
+  getAuditList(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl).pipe(
+      catchError(this.handleError)
+    );
   }
-  auditList(){
-    //return this.audits;
-     // return this.http.get<AuditModel[]>(this.apiUrl+"/audits", httpOptions);}
-      return this.http.get<AuditModel[]>(this.apiUrl);}
 
+  addAudit(newAudit: any): Observable<any> {
+    const typeAuditId = newAudit.typeAuditId ? newAudit.typeAuditId : null;
+    const typeAuditType = newAudit.typeAudit ? newAudit.typeAudit.type : null;
 
-  addAudit(newAudit : AuditModel){
-      console.log('creation audit',newAudit);
-   // this.audits.push(newAudit);
-      //return this.http.post<ProductModel>(this.apiURL+"/products/save",product,httpOptions);
-      return this.http.post<AuditModel>( this.apiUrl, newAudit);
+    const addData = {
+      nomAudit: newAudit.nomAudit,
+      dateAudit: newAudit.dateAudit,
+      status: newAudit.status,
+      description : newAudit.description,
+      typeAuditId: typeAuditId,
+      typeAudit: {
+        id: typeAuditId,
+        type: "string"
+      }
+    };
+    /*addCheckList(newCheckList: any): Observable<any> {
+    const typeCheckListAuditId = newCheckList.typechecklist_id ? newCheckList.typechecklist_id : null;
+    const typeCheckListAuditType = newCheckList.typeCheckListAudit ? newCheckList.typeCheckListAudit.type : null;
+    
+    // Créer un objet avec les données mises à jour, y compris typeCheckListAudit
+    const addData = {
+      name: newCheckList.name,
+      niveau: newCheckList.niveau,
+      code: newCheckList.code,
+      description: newCheckList.description,
+      typechecklist_id: typeCheckListAuditId,
+      typeCheckListAudit: { // Ajouter les données du typeCheckListAudit
+        id: typeCheckListAuditId,
+        type: "string"
+      }
+    };*/
 
+    return this.http.post<any>(`${this.apiUrl}`, addData, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
   }
-    /*deleteAudit(id: number){
-    //const index =this.audits.indexOf(audit,0);
-    //this.audits.splice(index,1);
-        console.log('supression d audit');
-        //const url = `${this.apiUrl}/${id}`;
-        return this.http.delete<AuditModel>(`${this.apiUrl}/${id}`);
-}*/
-/*2
-    deleteAudit(auditData: AuditModel) {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        };
 
-        return this.http.post<AuditModel>(`${this.apiUrl}/DeleteAudit`, auditData, httpOptions)
-            .pipe(
-                catchError(this.handleError)
-            );
-    }
-*/
-    deleteAudit(auditData: any) {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        };
+  deleteAudit(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
 
-        return this.http.post<any>(`${this.apiUrl}/DeleteAudit`, auditData, httpOptions)
-            .pipe(
-                catchError(this.handleError)
-            );
-    }
-    private handleError(error: any) {
-        console.error('An error occurred:', error);
-        return throwError(error);
-    }
-    /*deleteAudit(auditData: any) {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        };
+  getTypeAudits(): Observable<any[]> {
+    return this.http.get<any[]>(this.typeAuditUrl).pipe(
+      catchError(this.handleError)
+    );
+  }
 
-        return this.http.post<any>(`${this.apiUrl}/DeleteAudit`, auditData, httpOptions)
-            .pipe(
-                catchError(this.handleError)
-            );
-    }
+  searchAuditsByType(typeAuditId: number): Observable<any[]> {
+    const params = new HttpParams().set('typeAuditId', typeAuditId.toString());
+    return this.http.get<any[]>(`${this.apiUrl}/search`, { params }).pipe(
+      catchError(this.handleError)
+    );
+  }
 
-    private handleError(error: any) {
-        console.error('An error occurred:', error);
-        return throwError(error);
-    }*/
-    /*deleteAudit(id: number){
-        //const url = `${this.apiUrl}/Audit/Delete`;
-        //return this.http.post<any>(url, { id: id });
-
-            const url = `${this.apiUrl}/DeleteAudit`;
-            return this.http.post<any>,(url);
-
-    }*/
-
-    /*
-
-
-    deleteAudit(id: number){
-        const url = `${this.apiUrl}/Delete`;
-        return this.http.post<any>(url, {});
-    }
-    deleteAudit(id: number) {
-        console.log('supression d audit');
-        //return this.http.delete<any>(`${this.apiUrl}/${id}`);
-        return this.http.post<any>(`${this.apiUrl}/Delete`);
-    }*/
-   editAudit(id:number){
-      //this.audit=this.audits.find(p=> p.id==id)!;
-      //return this.audit;
-       return this.http.get<AuditModel>(`${this.apiUrl}/${id}`);
-
-   }
-   /*updateAudit(id: number, newAudit: AuditModel) {
-      //this.deleteAudit(audit);
-      //this.addAudit(audit);
-
-       return this.http.put<any>(this.apiUrl, newAudit);
-
-
-   }*/
-   updateAudit(id: number, newAudit: AuditModel) {
-    console.log('update audit', newAudit);
-    return this.http.put<any>(`${this.apiUrl}/${id}`, newAudit, httpOptions)
-      .pipe(
+  private handleError(error: any): Observable<never> {
+    console.error('An error occurred:', error);
+    return throwError(error);
+  }
+  updateAudit(id: number, updatedAudit: any): Observable<any> {
+    // Extraire l'ID et le type du typeCheckListAudit du formulaire mis à jour
+    const typeAuditId = updatedAudit.typeAuditId ? updatedAudit.typeAuditId : null;
+    const typeAuditType = updatedAudit.typeAudit ? updatedAudit.typeAudit.type : null;
+    
+    // Créer un objet avec les données mises à jour, y compris typeCheckListAudit
+    const updatedData = {
+        nomAudit: updatedAudit.nomAudit,
+        dateAudit: updatedAudit.dateAudit,
+        status: updatedAudit.status,
+        description : updatedAudit.description,
+        typeAuditId: typeAuditId,
+        typeAudit: {
+          id: typeAuditId,
+          type: "string"
+        }
+    };
+    // Envoyer la requête PUT avec les données mises à jour
+    return this.http.put<any>(`${this.apiUrl}/${id}`, updatedData, this.httpOptions).pipe(
         catchError(this.handleError)
       );
   }
-
-
-
-
-
-
-
-
-
+  /*updateCheckList(id: number, updatedCheckList: any): Observable<any> {
+    // Extraire l'ID et le type du typeCheckListAudit du formulaire mis à jour
+    const typeCheckListAuditId = updatedCheckList.typechecklist_id ? updatedCheckList.typechecklist_id : null;
+    const typeCheckListAuditType = updatedCheckList.typeCheckListAudit ? updatedCheckList.typeCheckListAudit.type : null;
+    
+    // Créer un objet avec les données mises à jour, y compris typeCheckListAudit
+    const updatedData = {
+      id: updatedCheckList.id,
+      name: updatedCheckList.name,
+      niveau: updatedCheckList.niveau,
+      code: updatedCheckList.code,
+      description: updatedCheckList.description,
+      typechecklist_id: typeCheckListAuditId,
+      typeCheckListAudit: { // Ajouter les données du typeCheckListAudit
+        id: typeCheckListAuditId,
+        type: "string"
+      }
+    };*/
+    
+  private get httpOptions() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+  }
 }

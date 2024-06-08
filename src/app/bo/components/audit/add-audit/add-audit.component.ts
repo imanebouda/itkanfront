@@ -12,7 +12,7 @@ import { Modal } from 'bootstrap';
 export class AddAuditComponent implements OnInit {
   @Input() addAudit: AuditModel;
   @Output() closeAddDialog = new EventEmitter<void>();
-
+  typeAuditOptions: any[] = [];
   addAuditForm: FormGroup;
   is_loading = false;
   errorMessage: string = '';
@@ -25,14 +25,32 @@ export class AddAuditComponent implements OnInit {
   ) {
     this.addAuditForm = this.fb.group({
       nomAudit: ['', Validators.required],
-      typeAudit: ['', Validators.required],
+      typeAuditId: ['', Validators.required],
       dateAudit: ['', Validators.required],
       status: ['', Validators.required],
       description: ['', Validators.required]
+      /*name: ['', Validators.required],
+      niveau: ['', Validators.required],
+      code: ['', Validators.required],
+      description: ['', Validators.required],
+      typechecklist_id: [null, Validators.required],*/
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadTypeAudits();
+  }
+
+  loadTypeAudits(): void {
+    this.auditService.getTypeAudits().subscribe(
+      typeAudits => {
+        this.typeAuditOptions = typeAudits;
+      },
+      error => {
+        console.error('Error fetching type audit:', error);
+      }
+    );
+  }
 
   submitForm() {
     if (this.addAuditForm.valid) {
